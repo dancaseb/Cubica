@@ -1,0 +1,12 @@
+{% extends "cubica/base.html" %}
+
+{% block content %}
+   
+        <h1>{{ post.post_text }}</h1>
+        <ul>
+        {% for comment in post.comment_set.all %}
+            <li>{{ comment.comment_text }}</li>
+        {% endfor %}
+        </ul>
+    
+{% endblock %}
