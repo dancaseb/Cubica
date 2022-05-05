@@ -12,6 +12,16 @@ def index(request):
     context = {'latest_post_list': latest_post_list}
     return render(request, 'cubica/index.html',context)
 
+@login_required
+def pos(request):
+    latest_post_list = Post.objects.order_by('-pub_date')
+    context = {'latest_post_list': latest_post_list}
+    return render(request, 'cubica/entry.html', {})
+
+def latest(request):
+    latest_post_list = Post.objects.order_by('-pub_date')
+    context = {'latest_post_list': latest_post_list}
+    return render(request, 'cubica/latest.html',context)
 
 @login_required
 def detail(request, post_id):
@@ -20,3 +30,6 @@ def detail(request, post_id):
 
 def entry(request):
     return render(request,'cubica/entry.html', {})
+
+def logout(request):
+    return render(request, 'cubica/logout.html', {})

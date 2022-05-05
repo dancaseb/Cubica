@@ -9,10 +9,9 @@
                 
                 <ul>
                 {% for post in latest_post_list %}
-                   
-                    <li><a href="{% url 'cubica:latest' %}"> Latest posts </a></li>
-                    <!--Post from user  <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} </a></li>
-                    <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} {{ post.post_text }}</a></li>-->
+                    
+                    Post from user  <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} </a></li>
+                    <!--<li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} {{ post.post_text }}</a></li>-->
                 {% endfor %}
                 
                 </ul>

@@ -127,3 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #after login redirect to main page cubica
 LOGIN_REDIRECT_URL = "/cubica"
+LOGOUT_REDIRECT_URL = "/cubica/logout"
