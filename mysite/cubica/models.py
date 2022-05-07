@@ -28,7 +28,8 @@ class SubCube(models.Model):
         return self.subname
 
 class Post(models.Model):
-    post_text = models.CharField(max_length=200)
+    post_name = models.CharField(max_length=100)
+    post_text = models.CharField(max_length=1200)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
     person = models.ForeignKey(Person,on_delete=models.CASCADE,default=1)
     pic = models.ImageField(upload_to ='static/cubica/images',default=None)

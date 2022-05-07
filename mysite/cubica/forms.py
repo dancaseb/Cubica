@@ -12,6 +12,7 @@ class CommentForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
+    post_text = forms.CharField(label="Your Post",widget=forms.Textarea())
     class Meta:
         model = Post
         exclude = ['person', 'subcube'] 

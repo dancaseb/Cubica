@@ -8,8 +8,15 @@ from .models import Post, SubCube, Person,Comment
 
 @login_required
 def index(request):
-    latest_post_list = Post.objects.order_by('-pub_date')
-    context = {'latest_post_list': latest_post_list}
+    #latest_post_list = Post.objects.order_by('-pub_date')
+    #context = {'latest_post_list': latest_post_list}
+    context = {}
+    post_list = Post.objects.order_by('?')
+    if len(post_list) >=4:
+        first_posts = post_list[:2]
+        second_posts = post_list[2:4]
+        context = {'first_posts':first_posts, 'second_posts':second_posts}
+
     return render(request, 'cubica/index.html',context)
 
 # @login_required
@@ -20,7 +27,8 @@ def index(request):
 
 #shows latest posts
 def latest(request):
-    latest_post_list = Post.objects.order_by('-pub_date')
+    post_list = Post.objects.order_by('-pub_date')
+    latest_post_list = post_list[0:5]
     context = {'latest_post_list': latest_post_list}
     return render(request, 'cubica/latest.html',context)
 
@@ -39,8 +47,10 @@ def logout(request):
 
 @login_required
 def groups(request):
-    groups = SubCube.objects.order_by('pk')
-    return render(request, 'cubica/groups.html',{'groups':groups})
+    groups = SubCube.objects.order_by('?')
+
+    context = {'groups':groups}
+    return render(request, 'cubica/groups.html',context)
 
 @login_required
 def group_detail(request,sub_id):
@@ -78,9 +88,10 @@ def addpost(request, sub_id):
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             text = post_form.cleaned_data['post_text']
+            name = post_form.cleaned_data['post_name']
             image = post_form.cleaned_data['pic']
             
-            post = Post(subcube=subcube, person=profile, post_text = text, pic = image)
+            post = Post(post_name= name, subcube=subcube, person=profile, post_text = text, pic = image)
             post.save()
             return redirect('cubica:group_detail', sub_id = sub_id)
     
