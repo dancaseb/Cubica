@@ -3,13 +3,12 @@
     {% block content %}
                         
 
-            {% if latest_post_list %}
+            {% if groups %}
                 
                 <ul>
-                {% for post in latest_post_list %}
+                {% for g in groups %}
+                <li><a href="{% url 'cubica:group_detail' g.id %}"> {{g.subname}} </a></li>
                     
-                    Post from user  <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} </a></li>
-                    <!--<li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} {{ post.post_text }}</a></li>-->
                 {% endfor %}
                 
                 </ul>

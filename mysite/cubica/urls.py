@@ -1,5 +1,6 @@
 from django.urls import path
-
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views 
 
 
@@ -11,4 +12,11 @@ urlpatterns = [
     path('latest/',views.latest,name = 'latest'),
     #path('',views.mainpage, name='main'),
     path('logout/', views.logout, name='logout'),
+    path('groups/', views.groups, name='groups'),
+    path('groups/<int:sub_id>/', views.group_detail, name='group_detail'),
+    path('profile',views.profile, name='profile'),
+    path('latest/<int:post_id>/postcomment', views.postcomment, name='postcomment'),
+    path('groups/<int:sub_id>/addpost', views.addpost, name='addpost'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

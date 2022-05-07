@@ -1,0 +1,24 @@
+{% extends "cubica/base.html" %}
+
+    {% block content %}
+                        
+
+            {% if group %}
+                <h1>{{group.subname}}</h1>
+                {% for person in group.people.all%}
+                    <li>{{person.user.username}}</li>
+                {%endfor%}
+            {% else %}
+                <p>No posts are available.</p>
+            {% endif %}
+
+            <h3>Post something!</h3>
+            <form action= "{% url 'cubica:addpost' group.id %}" method= "post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{post_form.as_p}}
+                <input type = "submit" value = "Submit">
+            </form>
+
+          
+
+    {% endblock %}

@@ -4,10 +4,32 @@
 
    
         <h1>{{ post.post_text }}</h1>
-        <ul>
-        {% for comment in post.comment_set.all %}
-            <li>{{ comment.comment_text }}</li>
-        {% endfor %}
-        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <p1><img src="{{ post.pic.url }}" class="img-fluid" alt="Responsive image"></p1>
+                </div>
+                <div class="col-lg-6">
+                    <ul>
+                        
+                        {% for comment in post.comment_set.all %}
+                            <li>User {{comment.person.user.username}} wrote:</li>
+                            {{ comment.comment_text }}
+                        {% endfor %}
+                    </ul>
+                        <h3>Add Comment</h3>
+                        <form action= "{% url 'cubica:postcomment' post.id %}" method= "post">
+                            {% csrf_token %}
+                            {{comment_form.as_p}}
+                            <input type = "submit" value = "Submit">
+                        </form>
+                </div>
+            </div>
+        </div>
+        
+        
+
+        
+
     
 {% endblock %}
