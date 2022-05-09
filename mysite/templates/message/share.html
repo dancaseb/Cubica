@@ -1,0 +1,12 @@
+{% extends "cubica/base.html" %}
+
+
+{% block content %}
+    <form method="post" action="{% url 'message:newmessage' sub_id post_id %}"enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{share_form.as_p}}
+    <input type="submit" class="btn btn-danger" value="Submit">
+  </form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "cubica/base.html" %}
+
+
+{% block content %}
+
+<div class="container text-center">
+    <br>
+    <h1>You cannot send yourself a message</h1>
+    <hr>
+    <a href="{% url 'cubica:group_detail' sub_id%}" class="btn btn-danger" role="button">Back to SubCube</a>
+
+</div>
+
+{% endblock %}

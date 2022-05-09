@@ -3,8 +3,12 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, AddToGroup
 from .models import Post, SubCube, Person,Comment
+from message.forms import ShareForm
+#from django.contrib.auth import login
+#from django.contrib import messages
+
 
 @login_required
 def index(request):
@@ -42,8 +46,12 @@ def detail(request, post_id):
 def entry(request):
     return render(request,'cubica/entry.html', {})
 
-def logout(request):
-    return render(request, 'cubica/logout.html', {})
+def share(request,sub_id, post_id):
+    share_form = ShareForm()
+    return render(request,'message/share.html', {'share_form':share_form,'sub_id':sub_id, 'post_id':post_id})
+
+#def logout(request):
+    #return render(request, 'registration/logout.html', {})
 
 @login_required
 def groups(request):
@@ -56,13 +64,27 @@ def groups(request):
 def group_detail(request,sub_id):
     group = get_object_or_404(SubCube, pk=sub_id) 
     post_form = PostForm()
-    return render(request, 'cubica/group_detail.html', {'group': group, 'post_form':post_form}) 
-
-@login_required
-def profile(request):
+    addtogroup_form = AddToGroup()
+    people = group.people.all()
+    posts = []
+    for p in people:
+        post_tmp = Post.objects.filter(person=p)
+        for i in post_tmp:
+            posts.append(i)
+    posts.sort(key=lambda x:x.pub_date, reverse=True)
     current_user = request.user
     person = get_object_or_404(Person, user=current_user) 
-    return render(request,'cubica/profile.html', {'person':person})
+    return render(request, 'cubica/group_detail.html', {'group': group, 'post_form':post_form,'addtogroup_form':addtogroup_form, 'posts':posts, 'person':person}) 
+
+@login_required
+def myprofile(request):
+    current_user = request.user
+    person = get_object_or_404(Person, user=current_user) 
+    return render(request,'cubica/myprofile.html', {'person':person})
+
+def profile(request,person_id):
+    person = get_object_or_404(Person, pk=person_id) 
+    return render(request,'cubica/myprofile.html', {'person':person})
 
 def postcomment(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -92,8 +114,24 @@ def addpost(request, sub_id):
             image = post_form.cleaned_data['pic']
             
             post = Post(post_name= name, subcube=subcube, person=profile, post_text = text, pic = image)
+            
             post.save()
             return redirect('cubica:group_detail', sub_id = sub_id)
-    
 
+def addtogroup(request, sub_id):
+    subcube = get_object_or_404(SubCube, pk=sub_id)
+    current_user = request.user
+    profile = get_object_or_404(Person, user=current_user) 
+    if request.method == 'POST':
+        addtogroup_form = AddToGroup(request.POST)
+        if addtogroup_form.is_valid():
+            person_ids = []
+            people_in_sub = subcube.people.all()
+            for p in people_in_sub:
+                person_ids.append(p.id)
+            person_ids.append(profile.id)
+            profiles = Person.objects.filter(id__in=person_ids)
+            subcube.people.set(profiles)
+            return redirect('cubica:group_detail', sub_id = sub_id)
+            
     

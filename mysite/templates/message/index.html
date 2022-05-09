@@ -1,0 +1,18 @@
+{% extends "cubica/base.html" %}
+
+{% block content %}
+<br>
+<div class="container text-center">
+    <h3>Welcome to Cubica messaging app.</h3>
+
+    
+    <h3> You can share posts with other users. Simply click the "Share" button next to a post.</h3>
+    <hr>
+    
+    <h4>Below you can view your shared posts or you can see posts someone else shared with you.</h4>
+    <br>
+    <a href="{% url 'message:sent' %}" class="btn btn-danger" role="button">Sent Posts</a>
+    <a href="{% url 'message:received' %}" class="btn btn-danger" role="button">Received Posts</a>
+</div>
+
+{% endblock %}

@@ -27,7 +27,7 @@
                                             <a href="{% url 'cubica:detail' post.id %}"> {{post.post_name}} </a>
                                         </h4>
                                         <p class="card-text">
-                                            <p> Posted by:  {{post.person.user.username}} </p>
+                                            <p> Posted by:  <a href="{% url 'cubica:profile' post.person.id %}"> {{post.person.user.username}}</a> </p>
                                             <p> SubCube: <a href="{% url 'cubica:group_detail' post.subcube.id %}"> {{post.subcube.subname}} </a> </p>
                                             <p>{{post.pub_date}}</p>
                                         </p>

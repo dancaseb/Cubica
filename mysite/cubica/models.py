@@ -22,7 +22,7 @@ class SubCube(models.Model):
     subname = models.CharField(max_length=200)
     created_date = models.DateTimeField('date created')
     people = models.ManyToManyField(Person)
-    #posts = models.ManyToManyField(Post)
+    
 
     def __str__(self):
         return self.subname
@@ -52,4 +52,9 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment_text
+
+
+
+
+
 

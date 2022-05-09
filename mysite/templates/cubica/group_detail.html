@@ -1,24 +1,117 @@
 {% extends "cubica/base.html" %}
 
-    {% block content %}
-                        
 
-            {% if group %}
-                <h1>{{group.subname}}</h1>
-                {% for person in group.people.all%}
-                    <li>{{person.user.username}}</li>
-                {%endfor%}
-            {% else %}
-                <p>No posts are available.</p>
-            {% endif %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-            <h3>Post something!</h3>
-            <form action= "{% url 'cubica:addpost' group.id %}" method= "post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{post_form.as_p}}
-                <input type = "submit" value = "Submit">
-            </form>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {
+      height: 1500px
+    }
 
-          
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
 
-    {% endblock %}
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+
+      .row.content {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+
+{% if person in group.people.all %}
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-4 sidenav">
+      <h2><br>{{group.subname}}</h2><br>
+      <h5>Users in this SubCube:</h5>
+      <hr>
+      {% for person in group.people.all %}
+        <h6>{{person.user.username}}</h6>
+      {% endfor %}
+    </div>
+
+    <div class="col-sm-8">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="card-title">
+            <h3>Post something into this SubCube!</h3>
+          </h4>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'cubica:addpost' group.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{post_form.as_p}}
+            <input type="submit" class="btn btn-danger" value="Submit">
+          </form>
+        </div>
+      </div>
+      <br>
+      <h4><small>Posts in this SubCube</small></h4>
+      <hr>
+      {% for post in posts%}
+      <div class="float-right">
+        <a href="{% url 'cubica:share' group.id post.id%}" class="btn btn-danger" role="button">Share this Post</a>
+      </div>
+
+      <h2> <a href="{% url 'cubica:detail' post.id %}"> {{post.post_name}} </a></h2>
+      <h5>Posted {{post.pub_date}} by {{post.person}}</h5>
+      <img class="img-fluid" src="{{ post.pic.url }}"  alt="Responsive image">
+      <br><br>
+      <h6>{{post.post_text}}</h6>
+      <hr><br>
+
+
+      {%endfor%}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+<p>Unfortunately, you are not part of this SubCube. Would you like to join it?</p>
+<form action="{% url 'cubica:addtogroup' group.id %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {{addtogroup_form.as_p}}
+  <input type="submit" class="btn btn-danger" value="Yes">
+</form>
+{% endif %}
+
+
+
+
+
+{% endblock %}

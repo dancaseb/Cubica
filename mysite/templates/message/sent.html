@@ -1,0 +1,36 @@
+{% extends "cubica/base.html" %}
+
+{% block content %}
+{% if messages %}
+    <div class=container>
+        <h2>
+            <br>
+            These are your sent posts
+        </h2>
+        <hr><br>
+        <div class="card" >
+            <ul class="list-group list-group-flush">
+             
+              {% for message in messages %}
+                <li class="list-group-item">
+                    Shared post <a href="{% url 'cubica:detail' message.shared_post.id %}"> {{message.shared_post.post_name}} </a>
+                    with user <a href="{% url 'cubica:profile' message.receiver.id %}">{{message.receiver.user.username}}</a> at {{message.sent_date}}</li>
+              {% endfor %}
+            </ul>
+        </div>
+
+
+        
+    </div>
+{% else %}
+<div class="container text-center">
+    <br>
+    <h2>
+        You have not shared any posts with your friends yet.
+    </h2>
+
+</div>
+{% endif %}
+    
+
+{% endblock %}

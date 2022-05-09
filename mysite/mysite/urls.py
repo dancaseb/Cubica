@@ -20,6 +20,8 @@ from cubica import views
 urlpatterns = [
     path('cubica/', include('cubica.urls')),
     path('admin/', admin.site.urls),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path('accounts/', include("django.contrib.auth.urls")),
+    #path('accounts/register', views.createuser, name='createuser'),
     path('', views.entry, name='entry'),
+     path('message/', include('message.urls')),
 ]
