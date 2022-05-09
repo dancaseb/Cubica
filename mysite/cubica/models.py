@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 #User that published the Post or Comment, extended Django User model
 
 class Achievement(models.Model):
+    name = models.CharField(max_length=200, default='name')
     achievement_text = models.CharField(max_length=200)
     achievement_points = models.IntegerField()
     def __str__(self):
@@ -12,8 +13,11 @@ class Achievement(models.Model):
 
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #achievements = models.ForeignKey(Achievement,on_delete=models.CASCADE, default=1)
     achievements = models.ManyToManyField(Achievement)
-    #pic = models.ImageField(upload_to ='static/cubica/profile_images',default=None)
+    profile_pic = models.ImageField(upload_to ='static/cubica/profile_images',default='static/cubica/profile_images/default_profile.jpg')
+    bio = models.CharField(max_length=400, default = '')
+
     def __str__(self):
         return self.user.username
 
@@ -22,8 +26,8 @@ class SubCube(models.Model):
     subname = models.CharField(max_length=200)
     created_date = models.DateTimeField('date created')
     people = models.ManyToManyField(Person)
-    
-
+    subcube_pic = models.ImageField(upload_to ='static/cubica/other',default='static/cubica/other/group.png')
+    description = models.CharField(max_length=400, default='')
     def __str__(self):
         return self.subname
 

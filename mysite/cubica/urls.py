@@ -20,6 +20,7 @@ urlpatterns = [
     path('groups/<int:sub_id>/addtogroup', views.addtogroup, name='addtogroup'),
     path('groups/<int:sub_id>/<int:post_id>/share', views.share, name='share'),
     path('profile/<int:person_id>',views.profile, name='profile'),
+    path('profile/<int:person_id>/changepicture',views.changepicture, name='changepicture'),
    
 ]
 

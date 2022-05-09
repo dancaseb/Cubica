@@ -15,7 +15,7 @@
                         </h4>
                         <p class="card-text">
                             <p> Posted by: <a href="{% url 'cubica:profile' post.person.id %}">{{post.person.user.username}}</a></p>
-                            <p>{{post.pub_date}}</p>
+                            <p><span style="color: grey"> {{post.pub_date|date:"d. m. Y, H:i"}}</span></p>
                         </p>
                     </div>
                     <div class="card-body">
@@ -35,7 +35,7 @@
                         <ul class="list-group list-group-flush">
                             {% for comment in post.comment_set.all %}
                             <li class="list-group-item">
-                                <p>{{comment.person.user.username}} wrote:</p>
+                                <p><i class="fa-solid fa-user-pen"></i> <a href="{% url 'cubica:profile' comment.person.id %}">{{comment.person.user.username}}</a> wrote:</p>
                                 {{ comment.comment_text }}
                             </li>
                                 

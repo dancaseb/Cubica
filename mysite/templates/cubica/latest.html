@@ -1,53 +1,56 @@
 {% extends "cubica/base.html" %}
 
-    {% block content %}
-                        
+{% block content %}
 
-            {% if latest_post_list %}
-                <div class="container text-center">
-                    <h1>You are currently viewing the latest posts</h1>
-                
-                </div>
-                
-                
-                {% for post in latest_post_list %}
-                    
-                   <!-- Post from user  <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} </a></li>
+
+{% if latest_post_list %}
+<div class="container text-center">
+    <br>
+    <h1>You are currently viewing the latest posts</h1>
+    <hr>
+</div>
+
+
+{% for post in latest_post_list %}
+
+<!-- Post from user  <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} </a></li>
                     <li><a href="{% url 'cubica:detail' post.id %}"> {{post.person}} {{ post.post_text }}</a></li>-->
-                  
-                    
-                        <div class="row">
-                            <div class="col-md-6 offset-3">
-                                <div class="card text-center">
-                                
-                                    <img class="card-img-top" src="{{ post.pic.url }}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title" >
-                                            
-                                            <a href="{% url 'cubica:detail' post.id %}"> {{post.post_name}} </a>
-                                        </h4>
-                                        <p class="card-text">
-                                            <p> Posted by:  <a href="{% url 'cubica:profile' post.person.id %}"> {{post.person.user.username}}</a> </p>
-                                            <p> SubCube: <a href="{% url 'cubica:group_detail' post.subcube.id %}"> {{post.subcube.subname}} </a> </p>
-                                            <p>{{post.pub_date}}</p>
-                                        </p>
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            
-                        </div>
-                        
 
-                    
-                 
-                {% endfor %}
-                
-                
-            {% else %}
-                <p>No posts are available.</p>
-            {% endif %}
+<br>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="card text-center">
 
-          
+            <img class="card-img-top" src="{{ post.pic.url }}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">
 
-    {% endblock %}
+                    <a href="{% url 'cubica:detail' post.id %}"> {{post.post_name}} </a>
+                </h4>
+                <p class="card-text">
+                <p> <i class="fa-solid fa-pen"></i> Posted by: <a href="{% url 'cubica:profile' post.person.id %}"> {{post.person.user.username}}</a>
+                </p>
+                <p><i class="fa-solid fa-user-group"></i> SubCube: <a href="{% url 'cubica:group_detail' post.subcube.id %}"> {{post.subcube.subname}} </a>
+                </p>
+                <p><span style="color: grey"> {{post.pub_date|date:"d. m. Y, H:i"}}</span></p>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endfor %}
+
+
+{% else %}
+<p>No posts are available.</p>
+{% endif %}
+
+
+
+{% endblock %}

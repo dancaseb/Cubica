@@ -41,12 +41,21 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-4 sidenav">
-      <h2><br>{{group.subname}}</h2><br>
+      <br>
+      <div class="card">
+        <img class="img" src="{{ group.subcube_pic.url }}" alt="Card image cap">
+      </div>
+      
+      <h2><br>{{group.subname}}</h2>
+      <h6><small><i class="fa-solid fa-clock"></i>  <span style="color: grey"> {{group.created_date|date:"d. m. Y. H:i"}}</span></small></h6>
+      <br><h5><small><i class="fa-solid fa-circle-info"></i> {{group.description}}</small></h5>
+      <hr><br>
       <h5>Users in this SubCube:</h5>
-      <hr>
+      
       {% for person in group.people.all %}
-        <h6>{{person.user.username}}</h6>
+        <h6><i class="fa-solid fa-user"></i> <a href="{% url 'cubica:profile' person.id %}"> {{person.user.username}}</a></h6>
       {% endfor %}
+      <hr>
     </div>
 
     <div class="col-sm-8">
@@ -67,7 +76,7 @@
         </div>
       </div>
       <br>
-      <h4><small>Posts in this SubCube</small></h4>
+      <h4>Posts in this SubCube</h4>
       <hr>
       {% for post in posts%}
       <div class="float-right">
@@ -75,7 +84,7 @@
       </div>
 
       <h2> <a href="{% url 'cubica:detail' post.id %}"> {{post.post_name}} </a></h2>
-      <h5>Posted {{post.pub_date}} by {{post.person}}</h5>
+      <h5>Posted {{post.pub_date|date:"d. m. Y, H:i"}} by  <a href="{% url 'cubica:profile' post.person.id %}"> {{post.person.user.username}}</a></h5>
       <img class="img-fluid" src="{{ post.pic.url }}"  alt="Responsive image">
       <br><br>
       <h6>{{post.post_text}}</h6>

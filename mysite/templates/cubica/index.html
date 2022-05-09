@@ -1,39 +1,84 @@
 {% extends "cubica/base.html" %}
 
-    {% block content %}
-  
-    <ul>
-    
-        
-        
-        
-    
-    
-    </ul>
+{% block content %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4">
-                
-            </div>
-            <div class="col-lg-4">
-                <ul></ul>
-                    {% for post in first_posts %}
-                    <p1><img src="{{ post.pic.url }}" class="img-fluid" alt="Responsive image"></p1>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <ul>
-                    {% for post in second_posts %}
-                    <p1><img src="{{ post.pic.url }}" class="img-fluid" alt="Responsive image"></p1>
-                    {% endfor %}
-                </ul>
+<ul>
+
+
+
+
+
+
+</ul>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Random Post</h3>
+            <div class="card">
+
+                <img class="card-img-top" src="{{ post.pic.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{% url 'cubica:detail' post.id %}">{{post.post_name}}</a>
+                    </h4>
+                    <p class="card-text">
+                    <p> Posted by: <a href="{% url 'cubica:profile' post.person.id %}">{{post.person.user.username}}</a>
+                    </p>
+                    <p><span style="color: grey"> {{post.pub_date|date:"d. m. Y, H:i"}}</span></p>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <p>{{post.post_text}}</p>
+                </div>
             </div>
         </div>
+        <div class="col-lg-4">
+            <h3>Random Comment</h3>
+            <ul></ul>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+
+                        <a href="{% url 'cubica:detail' comment.post.id %}"> {{comment.post.post_name}} </a>
+                    </h4>
+                    <hr>
+                    <p class="card-text">
+                    <p><i class="fa-solid fa-user-pen"></i> <a
+                            href="{% url 'cubica:profile' comment.person.id %}">{{comment.person.user.username}}</a>
+                        wrote:</p>
+                    {{ comment.comment_text }}
+                    </p>
+                </div>
+
+            </div>
+           
+            </ul>
+        </div>
+
+
+        <div class="col-lg-4">
+            <h3>Random SubCube</h3>
+            <div class="card">
+                <img class="card-img-top" src="{{ subcube.subcube_pic.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{% url 'cubica:group_detail' subcube.id %}"> {{subcube.subname}} </a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <p>{{subcube.description}}</p>
+                </div>
+            </div>
+
+        </div>
+
+        
+
     </div>
+</div>
 
-       
-          
 
-    {% endblock %}
+
+
+{% endblock %}

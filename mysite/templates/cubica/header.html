@@ -1,7 +1,7 @@
 {% load static %}
 
 
-
+<!--
 <nav class="navbar navbar-dark" style="background-color: #c04646;">
     <div class="container">
 
@@ -9,6 +9,7 @@
             
             
             {% if user.is_authenticated %}
+                
                 <li class="nav-item "><a style="color: #ffffff" href="{% url 'cubica:index' %}" class="nav-link"  aria-current="page">Cubica</a></li> 
                 <li class="nav-item"><a style="color: #ffffff" href="{% url 'cubica:latest' %}" class ="nav-link"> Latest posts </a></li>
                 <li class="nav-item"><a style="color: #ffffff" href="{% url 'cubica:groups' %}" class ="nav-link" > SubCubes </a></li>
@@ -25,4 +26,56 @@
             <li class="nav-item"><a style="color: #ffffff" href="{% url 'admin:index' %}" class="nav-link">Admin</a></li>
         </ul>
     </div>
-</nav> 
+</nav> -->
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #c04646;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                
+                
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'cubica:latest' %}">Latest posts</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'cubica:groups' %}">SubCubes</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'cubica:myprofile'  %}">My Profile</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'message:index' %}">Shared Posts</a>
+            </li>
+       
+            {% endif %}
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        {% if user.is_authenticated %}
+        <a class="navbar-brand mx-auto" href="{% url 'cubica:index' %}"><i class="fa-solid fa-house"></i> Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {% else %}
+        <a class="navbar-brand mx-auto" href="{% url 'entry' %}">Cubica</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {% endif %}
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+            </li>
+            {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'login' %}">Log in</a>
+            </li>
+            {% endif %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            </li>
+        </ul>
+    </div>
+</nav>

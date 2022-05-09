@@ -8,16 +8,17 @@
                     <div class="row">
                         {% for g in groups %}
                             <div class="col-lg-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="{% static 'cubica/other/group.png' %}" alt="Card image cap">
+                                <br>
+                                <div class="card text-center">
+                                    <img class="card-img-top" src="{{ g.subcube_pic.url }}" alt="Card image cap">
                                     <div class="card-body">
                                         <h4 class="card-title" >
                                             <a href="{% url 'cubica:group_detail' g.id %}"> {{g.subname}} </a>
                                         </h4>
                                     </div>
-                                    <div class="card-body">
+                                    <!--<div class="card-body">
                                         <p>{{post.post_text}}</p>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 
                             </div>

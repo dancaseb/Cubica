@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Post, SubCube
+from .models import Comment, Post, SubCube,Person
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -29,5 +29,14 @@ class AddToGroup(forms.ModelForm):
     class Meta:
         model = SubCube
         fields = []
+
+class ChangePicture(forms.ModelForm):
+    class Meta:
+        model = Person
+        labels = {
+            "profile_pic": "Update Picture"
+        }
+        fields = ['profile_pic']
+
 
 

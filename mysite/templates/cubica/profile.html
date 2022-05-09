@@ -13,12 +13,7 @@
 
         <div class="card-body">
           
-          <form action="{% url 'cubica:changepicture' person.id %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            {{change_picture.as_p}}
-            <input type="submit" class="btn btn-danger" value="Submit Picture">
-          </form>
+         
           <hr>
           <h3 class="card-title text-center">
             {{person.user.username}}
