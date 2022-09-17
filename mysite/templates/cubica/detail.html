@@ -36,6 +36,7 @@
                             {% for comment in post.comment_set.all %}
                             <li class="list-group-item">
                                 <p><i class="fa-solid fa-user-pen"></i> <a href="{% url 'cubica:profile' comment.person.id %}">{{comment.person.user.username}}</a> wrote:</p>
+                                <p><h6><small><i class="fa-solid fa-clock"></i>  <span style="color: grey"> {{comment.pub_date|date:"d. m. Y. H:i"}}</span></small></h6></p>
                                 {{ comment.comment_text }}
                             </li>
                                 
@@ -67,18 +68,7 @@
 
 
                 
-        
-    <!--<div class="col-lg-6">
-<p1><img src="{{ post.pic.url }}" class="img-fluid" alt="Responsive image"></p1>
-
-<div class="card">
-    <div class="card-body">
-        <p1>Posted by {{post.person.user.username}}</p1>
-        <p1>{{ post.post_text }}</p1>
-    </div>
-</div>
-
-</div>-->  
+    
 
         
 

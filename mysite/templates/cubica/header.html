@@ -1,32 +1,7 @@
 {% load static %}
 
 
-<!--
-<nav class="navbar navbar-dark" style="background-color: #c04646;">
-    <div class="container">
 
-        <ul class="nav nav-pills nav-fill">
-            
-            
-            {% if user.is_authenticated %}
-                
-                <li class="nav-item "><a style="color: #ffffff" href="{% url 'cubica:index' %}" class="nav-link"  aria-current="page">Cubica</a></li> 
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'cubica:latest' %}" class ="nav-link"> Latest posts </a></li>
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'cubica:groups' %}" class ="nav-link" > SubCubes </a></li>
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'cubica:myprofile'  %}" class ="nav-link"> My Profile </a></li> 
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'message:index' %}" class="nav-link">Shared Posts</a></li>
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'logout' %}" class="nav-link">Log out</a></li>
-
-
-            {% else %}
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'entry' %}" class="nav-link">Cubica</a></li>
-                <li class="nav-item"><a style="color: #ffffff" href="{% url 'login' %}" class="nav-link">Log in</a></li>
-                
-            {% endif %}
-            <li class="nav-item"><a style="color: #ffffff" href="{% url 'admin:index' %}" class="nav-link">Admin</a></li>
-        </ul>
-    </div>
-</nav> -->
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #c04646;">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">

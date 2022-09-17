@@ -16,6 +16,7 @@
         <div class="col-lg-4">
             <h3>Random Post</h3>
             <div class="card">
+                {% if post %}
 
                 <img class="card-img-top" src="{{ post.pic.url }}" alt="Card image cap">
                 <div class="card-body">
@@ -31,12 +32,22 @@
                 <div class="card-body">
                     <p>{{post.post_text}}</p>
                 </div>
+                {% else %}
+                <div class="card-body">
+                    <h4 class="card-title">
+                        No posts have been submitted yet.
+                    </h4>
+
+                </div>
+
+                {% endif %}
             </div>
         </div>
         <div class="col-lg-4">
             <h3>Random Comment</h3>
             <ul></ul>
             <div class="card">
+                {% if comment %}
                 <div class="card-body">
                     <h4 class="card-title">
 
@@ -50,14 +61,23 @@
                     {{ comment.comment_text }}
                     </p>
                 </div>
+                {% else %}
+                <h4 class="card-title">
+
+                    No comments have been submitted yet.
+                </h4>
+
+                {% endif %}
+
 
             </div>
-           
+
             </ul>
         </div>
 
 
         <div class="col-lg-4">
+            {% if subcube %}
             <h3>Random SubCube</h3>
             <div class="card">
                 <img class="card-img-top" src="{{ subcube.subcube_pic.url }}" alt="Card image cap">
@@ -70,10 +90,21 @@
                     <p>{{subcube.description}}</p>
                 </div>
             </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        There are no SubCubes available.
+                    </h4>
+                </div>
+
+            </div>
+            {% endif %}
+
 
         </div>
 
-        
+
 
     </div>
 </div>

@@ -13,9 +13,11 @@
              
               {% for message in messages %}
                 <li class="list-group-item">
-                    <i class="fa-solid fa-paper-plane"></i> Shared post <a href="{% url 'cubica:detail' message.shared_post.id %}"> {{message.shared_post.post_name}} </a>
-                    with user <a href="{% url 'cubica:profile' message.receiver.id %}">{{message.receiver.user.username}}</a> at {{message.sent_date|date:"d. m. Y, H:i"}}</li>
-              {% endfor %}
+                    <i class="fa-solid fa-paper-plane"></i> You shared post <a href="{% url 'cubica:detail' message.shared_post.id %}"> {{message.shared_post.post_name}} </a>
+                    with user <a href="{% url 'cubica:profile' message.receiver.id %}">{{message.receiver.user.username}}</a> at {{message.sent_date|date:"d. m. Y, H:i"}}
+                    <h6><small><i class="fa-solid fa-pen-to-square"></i>  {{message.text}}</small></h6>
+                </li>
+                {% endfor %}
             </ul>
         </div>
 
