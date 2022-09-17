@@ -1,7 +1,7 @@
 # Cubica
 Django project
 
-How to run?
+How to run on linux?
 - Install django
 - cd into Cubica/mysite
 - execute -> python manage.py runserver
