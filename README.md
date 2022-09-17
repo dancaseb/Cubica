@@ -1,5 +1,5 @@
 # Cubica
-Django project
+Django project. Python 2022 summer semester project in Python.
 
 How to run on linux?
 - Install django
